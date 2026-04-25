@@ -13,5 +13,7 @@ else
 fi
 
 NAME="OPUS-${MACHINE}-$N"
+PROJECTS_DIR="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}/OPUS"
+mkdir -p "$PROJECTS_DIR"
 printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
-exec tmux new -s "$NAME" "caffeinate -s claude --model claude-opus-4-6 --name $NAME --dangerously-skip-permissions --rc"
+exec tmux new -s "$NAME" -c "$PROJECTS_DIR" "caffeinate -s claude --model claude-opus-4-6 --name $NAME --dangerously-skip-permissions --rc"

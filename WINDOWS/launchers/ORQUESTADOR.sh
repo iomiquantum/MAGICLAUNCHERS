@@ -10,9 +10,11 @@ else
 fi
 
 NAME="ORQUESTADOR-${MACHINE}"
+PROJECTS_DIR="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}/ORQUESTADOR"
+mkdir -p "$PROJECTS_DIR"
 printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
 if tmux has-session -t "$NAME" 2>/dev/null; then
     exec tmux attach -t "$NAME"
 else
-    exec tmux new -s "$NAME" "claude --model claude-opus-4-6 --name $NAME --append-system-prompt-file $STATE/orquestador-prompt.txt --dangerously-skip-permissions --rc"
+    exec tmux new -s "$NAME" -c "$PROJECTS_DIR" "claude --model claude-opus-4-6 --name $NAME --append-system-prompt-file $STATE/orquestador-prompt.txt --dangerously-skip-permissions --rc"
 fi

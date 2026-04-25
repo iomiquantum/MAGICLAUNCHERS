@@ -13,5 +13,7 @@ else
 fi
 
 NAME="OPUS47-${MACHINE}-$N"
+PROJECTS_DIR="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}/OPUS47"
+mkdir -p "$PROJECTS_DIR"
 printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
-exec tmux new -s "$NAME" "claude --model claude-opus-4-7 --name $NAME --dangerously-skip-permissions --rc"
+exec tmux new -s "$NAME" -c "$PROJECTS_DIR" "claude --model claude-opus-4-7 --name $NAME --dangerously-skip-permissions --rc"
