@@ -21,6 +21,14 @@ mkdir -p "$DEST" "$STATE"
 cp "$SRC/launchers/"*.sh "$DEST/"
 chmod +x "$DEST/"*.sh
 
+# Helpers: set-machine-name y update-launchers (desde GENERICOS)
+GEN_SCRIPTS="$SRC/../GENERICOS/scripts"
+if [ -d "$GEN_SCRIPTS" ]; then
+    cp "$GEN_SCRIPTS/set-machine-name.sh" "$DEST/" 2>/dev/null || true
+    cp "$GEN_SCRIPTS/update-launchers.sh" "$DEST/" 2>/dev/null || true
+    chmod +x "$DEST/set-machine-name.sh" "$DEST/update-launchers.sh" 2>/dev/null || true
+fi
+
 # Copia el prompt del orquestador a la ruta que esperan los launchers
 cp "$SRC/config/orquestador-prompt.txt" "$STATE/orquestador-prompt.txt"
 

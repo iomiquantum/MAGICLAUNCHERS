@@ -2,8 +2,18 @@
 CAFFEINATE=""
 command -v caffeinate >/dev/null 2>&1 && CAFFEINATE="caffeinate -s"
 
-COUNTER_FILE="$HOME/.claude-launchers/opus47-counter"
-mkdir -p "$HOME/.claude-launchers"
+STATE="$HOME/.claude-launchers"
+mkdir -p "$STATE"
+COUNTER_FILE="$STATE/opus47-counter"
 N=$(($(cat "$COUNTER_FILE" 2>/dev/null || echo 0) + 1))
 echo "$N" > "$COUNTER_FILE"
-exec tmux new -s "OPUS47-$N" "$CAFFEINATE claude --model claude-opus-4-7 --name OPUS47-$N --dangerously-skip-permissions --rc"
+
+if [ -f "$STATE/machine-name" ]; then
+    MACHINE=$(cat "$STATE/machine-name" | tr -d '[:space:]')
+else
+    MACHINE=$(hostname -s 2>/dev/null || hostname 2>/dev/null || echo "PC")
+    MACHINE=$(echo "$MACHINE" | tr -c 'a-zA-Z0-9' '-' | cut -c1-15)
+fi
+
+NAME="OPUS47-${MACHINE}-$N"
+exec tmux new -s "$NAME" "$CAFFEINATE claude --model claude-opus-4-7 --name $NAME --dangerously-skip-permissions --rc"
