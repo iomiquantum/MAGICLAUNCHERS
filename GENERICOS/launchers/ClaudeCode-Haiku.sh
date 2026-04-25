@@ -16,7 +16,8 @@ else
 fi
 
 NAME="HAIKU-${MACHINE}-$N"
-PROJECTS_DIR="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}/HAIKU"
-mkdir -p "$PROJECTS_DIR"
+WORKSPACE="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}"
+mkdir -p "$WORKSPACE/PROYECTOS" "$WORKSPACE/ORQUESTADOS" "$WORKSPACE/ARCHIVO"
+[ ! -f "$WORKSPACE/CLAUDE.md" ] && [ -f "$STATE/workspace-template/CLAUDE.md" ] && cp "$STATE/workspace-template/CLAUDE.md" "$WORKSPACE/"
 printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
-exec tmux new -s "$NAME" -c "$PROJECTS_DIR" "$CAFFEINATE claude --model claude-haiku-4-5-20251001 --name $NAME --dangerously-skip-permissions --rc"
+exec tmux new -s "$NAME" -c "$WORKSPACE" "$CAFFEINATE claude --model claude-haiku-4-5-20251001 --name $NAME --dangerously-skip-permissions --rc"

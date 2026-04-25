@@ -13,7 +13,8 @@ else
 fi
 
 NAME="SONNET-${MACHINE}-$N"
-PROJECTS_DIR="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}/SONNET"
-mkdir -p "$PROJECTS_DIR"
+WORKSPACE="$HOME/Documents/PROYECTOS CLAUDE CODE/${MACHINE}"
+mkdir -p "$WORKSPACE/PROYECTOS" "$WORKSPACE/ORQUESTADOS" "$WORKSPACE/ARCHIVO"
+[ ! -f "$WORKSPACE/CLAUDE.md" ] && [ -f "$STATE/workspace-template/CLAUDE.md" ] && cp "$STATE/workspace-template/CLAUDE.md" "$WORKSPACE/"
 printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
-exec tmux new -s "$NAME" -c "$PROJECTS_DIR" "claude --model claude-sonnet-4-6 --name $NAME --dangerously-skip-permissions --rc"
+exec tmux new -s "$NAME" -c "$WORKSPACE" "claude --model claude-sonnet-4-6 --name $NAME --dangerously-skip-permissions --rc"

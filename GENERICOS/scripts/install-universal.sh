@@ -97,16 +97,29 @@ case "$OS_TYPE" in
     linux) install_linux ;;
 esac
 
-# --- Copiar launchers ---
+# --- Copiar launchers + scripts + template ---
 echo ""
 echo "== Instalando launchers =="
 DEST="$HOME/Desktop/CLAUDE-LAUNCHERS"
 STATE="$HOME/.claude-launchers"
-mkdir -p "$DEST" "$STATE"
+SCRIPTS="$STATE/scripts"
+WS_TPL="$STATE/workspace-template"
+mkdir -p "$DEST" "$STATE" "$SCRIPTS" "$WS_TPL"
 
 cp "$GENERICOS_DIR/launchers/"*.sh "$DEST/"
 chmod +x "$DEST/"*.sh
 cp "$GENERICOS_DIR/config/orquestador-prompt.txt" "$STATE/"
+
+# Scripts para Claude (crear/listar/promover/archivar proyectos)
+for s in crear-proyecto.sh listar-proyectos.sh promover-a-orca.sh archivar-proyecto.sh; do
+    if [ -f "$GENERICOS_DIR/scripts/$s" ]; then
+        cp "$GENERICOS_DIR/scripts/$s" "$SCRIPTS/"
+        chmod +x "$SCRIPTS/$s"
+    fi
+done
+
+# CLAUDE.md template
+[ -f "$GENERICOS_DIR/workspace/CLAUDE.md" ] && cp "$GENERICOS_DIR/workspace/CLAUDE.md" "$WS_TPL/"
 
 # En Mac, crear tambien .command symlinks (para doble-click desde Finder)
 if [ "$OS_TYPE" = "mac" ]; then
