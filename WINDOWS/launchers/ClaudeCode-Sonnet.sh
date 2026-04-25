@@ -13,4 +13,5 @@ else
 fi
 
 NAME="SONNET-${MACHINE}-$N"
+printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
 exec tmux new -s "$NAME" "claude --model claude-sonnet-4-6 --name $NAME --dangerously-skip-permissions --rc"

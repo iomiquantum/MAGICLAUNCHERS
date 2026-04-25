@@ -10,6 +10,7 @@ else
 fi
 
 NAME="ORQUESTADOR-${MACHINE}"
+printf '\033]0;%s\007\033]2;%s\007' "$NAME" "$NAME"
 if tmux has-session -t "$NAME" 2>/dev/null; then
     exec tmux attach -t "$NAME"
 else
