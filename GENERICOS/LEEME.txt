@@ -1,0 +1,44 @@
+============================================================
+  GENERICOS - Instalador Universal (Mac / Linux / Windows)
+============================================================
+
+QUE HACE
+--------
+Instala Claude Code + launchers en CUALQUIER computador:
+  - macOS   -> brew + npm, copia .command al Escritorio
+  - Linux   -> apt/dnf/pacman + npm
+  - Windows -> delega a ..\WINDOWS\ (usa WSL2 + Ubuntu)
+
+Todos los sistemas terminan con los mismos 8 launchers:
+  Opus, Opus47, Sonnet, Haiku, Orquestador, Broadcast, Dispatch, Kill-All
+
+
+COMO USAR
+---------
+
+Mac:
+  Doble-click en INSTALAR.command
+  (o en Terminal:  bash INSTALAR.command)
+
+Linux:
+  bash INSTALAR.sh
+
+Windows:
+  Doble-click en INSTALAR.bat
+  (te redirige al instalador completo en ..\WINDOWS\)
+
+
+CLAVE DE ACCESO
+---------------
+Al arrancar, te pide una clave.
+Si la ingresas mal 3 veces, aborta.
+
+
+RESULTADO
+---------
+Despues de instalar, tendras en tu Escritorio:
+  CLAUDE-LAUNCHERS/  (Mac/Linux)
+  CLAUDE LAUNCHERS/  (Windows, dentro de WSL los .sh)
+
+Con doble-click en cada launcher arranca una sesion Claude
+con ese modelo y nombre numerado automatico (OPUS47-1, OPUS47-2...).

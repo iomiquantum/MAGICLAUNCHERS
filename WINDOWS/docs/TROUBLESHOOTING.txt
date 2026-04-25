@@ -1,0 +1,100 @@
+============================================================
+  TROUBLESHOOTING - Problemas comunes
+============================================================
+
+"INSTALAR.bat se cierra solo / no hace nada"
+  - Click derecho -> "Ejecutar como administrador"
+  - Si aparece aviso de SmartScreen: "Mas informacion" -> "Ejecutar de todas formas"
+
+
+"Error: WSL no se instalo" / "codigo de salida 4294967295"
+  - Abre PowerShell como admin y corre:
+      wsl --install
+      wsl --set-default-version 2
+  - Reinicia el PC.
+  - Abre "Ubuntu" desde el menu Inicio UNA VEZ, crea usuario y password.
+  - Vuelve a correr INSTALAR.bat.
+
+
+"No encuentra Ubuntu despues de instalar WSL"
+  - Abre Microsoft Store, busca "Ubuntu", instala.
+  - Despues abrelo UNA VEZ para crear usuario.
+  - Vuelve a correr INSTALAR.bat.
+
+
+"Claude no esta autenticado / da error al iniciar"
+  - Dentro de WSL (abre la app Ubuntu), corre:
+      claude
+  - Te dara un link - abrelo en el navegador, autoriza, copia el
+    codigo de vuelta en la terminal.
+  - Ya autenticado, todos los .bat funcionan.
+
+
+"npm install -g falla con EACCES"
+  - Corre dentro de WSL:
+      sudo npm install -g @anthropic-ai/claude-code
+  - El setup-ubuntu.sh ya usa sudo; si lo volviste a correr manual
+    sin sudo, usa el comando de arriba.
+
+
+"Los launchers .bat abren una ventana pero se cierra sola"
+  - Es que WSL no esta corriendo. Abre primero Ubuntu desde el menu,
+    deja esa terminal abierta y vuelve a probar.
+  - Alternativa: corre wsl.exe en PowerShell para iniciarlo manualmente.
+
+
+"tmux: command not found"
+  - Dentro de Ubuntu:
+      sudo apt-get update && sudo apt-get install -y tmux
+
+
+"No veo el dashboard en http://localhost:3200"
+  - Verifica que corriste Start-Dashboard.bat
+  - Dentro de WSL:
+      cat ~/.claude-launchers/logs/orchestrator.log
+      cat ~/.claude-launchers/logs/usage.log
+  - Si hay error de modulo npm en Node, dentro del directorio
+    del dashboard corre:
+      cd ~/Desktop/CLAUDE-LAUNCHERS/dashboard
+      npm install
+
+
+"Quiero reinstalar todo limpio"
+  - Desinstala Ubuntu:
+      wsl --unregister Ubuntu
+  - Borra la carpeta "CLAUDE LAUNCHERS" del Escritorio.
+  - Vuelve a correr INSTALAR.bat.
+
+
+"Mi PC tiene 8GB RAM y se congela"
+  - Cierra Chrome y otras apps pesadas antes de abrir sesiones.
+  - No corras mas de 2 launchers a la vez.
+  - Opcional: limita memoria de WSL creando
+    C:\Users\TU_USUARIO\.wslconfig con:
+        [wsl2]
+        memory=4GB
+        processors=2
+
+
+"El modelo Opus 4.6 me da error de modelo obsoleto"
+  - Usa Opus47.bat (modelo claude-opus-4-7, el actual).
+  - Opus.bat esta ahi por compatibilidad con el setup viejo.
+
+
+"Como actualizo Claude Code a la ultima version?"
+  - Dentro de WSL:
+      sudo npm install -g @anthropic-ai/claude-code@latest
+
+
+LOGS UTILES
+-----------
+Dentro de Ubuntu:
+  ~/.claude-launchers/logs/orchestrator.log   (Node dashboard)
+  ~/.claude-launchers/logs/usage.log          (Python usage)
+  ~/.claude-launchers/*-counter               (contadores sesiones)
+
+Para ver todas las sesiones tmux activas:
+  tmux ls
+
+Para entrar a una sesion existente:
+  tmux attach -t OPUS47-1

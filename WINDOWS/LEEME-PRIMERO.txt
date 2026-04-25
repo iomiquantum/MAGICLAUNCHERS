@@ -1,0 +1,93 @@
+============================================================
+  CLAUDE CODE - Setup Windows (replica del Mac)
+  Para PC1-HP, PC2 y PC3
+============================================================
+
+QUE HACE ESTA CARPETA
+---------------------
+Instala en tu PC Windows el mismo setup que Miguel tiene en su Mac:
+  - Claude Code (CLI oficial de Anthropic)
+  - 4 launchers por modelo: Opus 4.6, Opus 4.7, Sonnet 4.6, Haiku 4.5
+  - ORQUESTADOR (MAESTRO) que delega a workers
+  - BROADCAST / DISPATCH para enviar tareas a sesiones
+  - KILL-ALL para cerrar todo
+  - Dashboard web en http://localhost:3200
+
+Todo corre sobre WSL2 + Ubuntu (linux dentro de Windows), para
+tener tmux y el mismo comportamiento que la Mac.
+
+
+COMO INSTALAR (3 pasos)
+-----------------------
+1. Copia esta carpeta COMPLETA a cualquier sitio del PC.
+   (Ejemplo: C:\Users\TU_USUARIO\Desktop\WINDOWS-CLAUDE-SETUP)
+
+2. Doble-click en "INSTALAR.bat".
+   Te va a pedir permisos de Administrador - acepta.
+
+3. El instalador te guia:
+   - Verifica tu sistema (RAM, disco)
+   - Configura Windows para no dormir con corriente
+   - Instala WSL2 + Ubuntu (si te toca instalar, reinicia y
+     vuelve a correr INSTALAR.bat despues del reinicio)
+   - Instala Node.js, tmux y Claude Code dentro de Ubuntu
+   - Crea los 10 .bat en tu Escritorio dentro de "CLAUDE LAUNCHERS"
+
+
+PRIMERA VEZ QUE USAS CLAUDE
+---------------------------
+1. Abre "CLAUDE LAUNCHERS" en tu Escritorio.
+2. Doble-click en Haiku.bat (el mas barato para probar).
+3. Claude te pide autenticar - sigue las instrucciones en pantalla
+   (copia el link, abrelo en el navegador, pega el codigo).
+4. Despues de autenticar, TODOS los launchers funcionan.
+
+
+USO DIARIO
+----------
+- Opus.bat / Opus47.bat / Sonnet.bat / Haiku.bat
+    Abre una nueva sesion tmux con ese modelo.
+    Cada vez incrementa el contador: OPUS-1, OPUS-2...
+
+- Orquestador.bat
+    Tu MAESTRO. Delega tareas a workers.
+    Sesion unica: si ya existe se reconecta.
+
+- Broadcast.bat
+    Te pregunta una tarea y la envia a TODAS las sesiones tmux.
+
+- Dispatch.bat
+    Te pregunta a cual sesion enviar (ej: OPUS47-2) y la tarea.
+
+- Kill-All.bat
+    Cierra todas las sesiones tmux.
+
+- Start-Dashboard.bat
+    Arranca dashboard en http://localhost:3200 y lo abre.
+
+- Stop-Dashboard.bat
+    Detiene el dashboard.
+
+
+REQUISITOS MINIMOS
+------------------
+- Windows 10 build 19041+ o Windows 11 (cualquier build)
+- 64-bit
+- 4 GB RAM (recomendado 8+)
+- 10 GB libres en C: (recomendado 20+)
+
+
+SI ALGO FALLA
+-------------
+Lee docs/TROUBLESHOOTING.txt o vuelve a correr INSTALAR.bat
+(es idempotente: solo re-instala lo que falte).
+
+
+ESTADO DE TUS 3 PCs (snapshot del setup)
+----------------------------------------
+PC1-HP    (LAB, i7-8550U, 16GB, Win11 Pro)   - 57.9GB libres
+PC2       (LAB, i7-8550U, 8GB,  Win10 Pro)   - 153GB libres
+PC3       (dexxt, i7-9750H, 8GB, Win11 Home) - 55.2GB libres  (GPU GTX 1660 Ti)
+
+PC1 y PC3: limpia disco antes de instalar (abre "Storage Sense").
+PC2 y PC3: con 8GB evita correr muchas sesiones a la vez.

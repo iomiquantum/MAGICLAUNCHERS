@@ -1,0 +1,67 @@
+============================================================
+  MAGICLAUNCHERS
+  Setup de Claude Code para Mac, Linux y Windows
+============================================================
+
+QUE ES
+------
+Replica mi flujo personal: una sesion tmux por modelo, con
+contador automatico (OPUS-1, OPUS-2...), orquestador que delega
+a workers, broadcast/dispatch de tareas a sesiones activas y
+un dashboard web opcional.
+
+CONTENIDO
+---------
+  GENERICOS/    Instalador universal (Mac/Linux/Windows)
+  WINDOWS/      Instalador completo solo para Windows (WSL2)
+  .auth-hash    Hash PBKDF2 de la clave de acceso
+
+COMO INSTALAR
+-------------
+
+Mac:
+  cd MAGICLAUNCHERS/GENERICOS
+  bash INSTALAR.command
+  (o doble-click desde Finder)
+
+Linux:
+  cd MAGICLAUNCHERS/GENERICOS
+  bash INSTALAR.sh
+
+Windows:
+  Doble-click en MAGICLAUNCHERS/WINDOWS/INSTALAR.bat
+  (te pide permisos de Admin)
+
+
+CLAVE DE ACCESO
+---------------
+Al arrancar el instalador pide una clave.
+Si fallas 3 veces, aborta.
+
+
+QUE INSTALA
+-----------
+Los mismos 8 launchers en todos los sistemas:
+  Opus        (claude-opus-4-6)
+  Opus47      (claude-opus-4-7)
+  Sonnet      (claude-sonnet-4-6)
+  Haiku       (claude-haiku-4-5-20251001)
+  Orquestador (maestro, delega a workers)
+  Broadcast   (misma tarea a todas las sesiones)
+  Dispatch    (tarea a sesion especifica)
+  Kill-All    (cierra todas las sesiones)
+
+Y en Windows ademas:
+  Start-Dashboard / Stop-Dashboard  (dashboard web local)
+
+
+REQUISITOS
+----------
+  Mac:     cualquier version reciente (10.15+)
+  Linux:   apt, dnf o pacman
+  Windows: 10/11 64-bit, build 19041+ (para WSL2)
+
+
+AUTOR
+-----
+Miguel Valencia - iomiquantum en GitHub
