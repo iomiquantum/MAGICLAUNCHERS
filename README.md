@@ -8,8 +8,9 @@ Replica mi flujo personal: una sesión tmux por modelo, contador automático, or
 
 | Carpeta | Para qué |
 |---|---|
-| [`GENERICOS/`](GENERICOS/) | Instalador universal — detecta macOS, Linux o Windows y hace lo correcto |
+| [`MAC/`](MAC/) | Mis `.command` originales de Mac (replica exacta de mi setup) |
 | [`WINDOWS/`](WINDOWS/) | Instalador completo Windows (WSL2 + Ubuntu + launchers .bat en Escritorio) |
+| [`GENERICOS/`](GENERICOS/) | Instalador universal — detecta macOS, Linux o Windows y hace lo correcto |
 
 ## Requisitos
 
@@ -32,12 +33,18 @@ git clone https://github.com/iomiquantum/MAGICLAUNCHERS.git
 
 ### Instalar
 
-**macOS:**
+**macOS (replica exacta de mi setup original):**
+```bash
+cd MAGICLAUNCHERS/MAC
+bash INSTALAR.command
+```
+O doble-click en `MAC/INSTALAR.command` desde Finder.
+
+**macOS o Linux (instalador universal):**
 ```bash
 cd MAGICLAUNCHERS/GENERICOS
 bash INSTALAR.command
 ```
-O doble-click en `INSTALAR.command` desde Finder.
 
 **Linux:**
 ```bash

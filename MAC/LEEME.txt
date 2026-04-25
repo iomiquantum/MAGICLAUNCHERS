@@ -1,0 +1,35 @@
+============================================================
+  MAC - Setup original de Miguel (.command originales)
+============================================================
+
+QUE ES
+------
+Replica EXACTA de mi setup Mac actual:
+  ~/Desktop/CLAUDE LAUNCHERS/
+    ├── LAUNCHERS/              (Opus, Opus47, Sonnet, Haiku, Kill-All)
+    ├── ORQUESTADOR/            (ORQUESTADOR.command con prompt)
+    ├── BROADCAST-DISPATCH/     (BROADCAST + DISPATCH)
+    └── dashboard-ORQUESTADOR/  (Node+Python+HTML)
+
+Los .command de esta carpeta son los originales tal cual
+(sin modificar, con caffeinate, tmux, todos los flags).
+
+
+COMO USAR
+---------
+Opcion A - Instalador con password gate:
+  Doble-click en INSTALAR.command
+  (instala brew/tmux/node/claude si faltan + copia .command al Escritorio)
+
+Opcion B - Copia manual sin instalador:
+  Arrastra esta carpeta MAC/ a ~/Desktop/ y los .command funcionan
+  desde ahi tal cual (asumiendo que ya tienes brew+tmux+claude).
+
+
+DIFERENCIA CON GENERICOS/
+-------------------------
+  MAC/        -> mis .command ORIGINALES, estructura exacta de mi Mac
+  GENERICOS/  -> scripts universales (Mac+Linux) con deteccion de SO
+
+Si eres yo reinstalando mi Mac: usa MAC/
+Si eres yo instalando en Mac nueva o Linux: usa GENERICOS/
