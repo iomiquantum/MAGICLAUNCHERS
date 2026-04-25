@@ -15,19 +15,34 @@ echo "  Actualizar launchers desde GitHub"
 echo "========================================"
 echo ""
 
-# Detectar estructura local
-# Orden: estructura Miguel (Documents/...), Desktop custom, Desktop estandar
+# Detectar estructura local - prioridades:
+# 1) La propia carpeta donde esta este .command (si tiene otros .command hermanos)
+# 2) Estructura Miguel: Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS /
+# 3) Desktop variantes
 LAUNCHERS_DIR=""
 ORQUESTADOR_DIR=""
 
-# 1) Estructura de Miguel: Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS /
-if [ -d "$HOME/Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS " ]; then
+SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# 1) Auto-detectar: si estoy en una carpeta con otros launchers, esa es mi destino
+if ls "$SELF_DIR/"ClaudeCode-*.command >/dev/null 2>&1; then
+    LAUNCHERS_DIR="$SELF_DIR"
+    # Buscar carpeta hermana con ORQUESTADOR
+    PARENT="$(dirname "$SELF_DIR")"
+    for candidate in "$PARENT/ELIJE EL MODELO PARA LA TAREA " "$PARENT/ORQUESTADOR" "$PARENT/ELIJE EL MODELO PARA LA TAREA"; do
+        if [ -d "$candidate" ]; then
+            ORQUESTADOR_DIR="$candidate"
+            break
+        fi
+    done
+# 2) Estructura de Miguel: Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS /
+elif [ -d "$HOME/Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS " ]; then
     LAUNCHERS_DIR="$HOME/Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /LAUNCHERS "
     ORQUESTADOR_DIR="$HOME/Documents/CLAUDE Desarollo/CLAUDE LAUNCHERS /ELIJE EL MODELO PARA LA TAREA "
-# 2) Desktop estandar nuevo
+# 3) Desktop estandar nuevo
 elif [ -d "$HOME/Desktop/CLAUDE-LAUNCHERS" ]; then
     LAUNCHERS_DIR="$HOME/Desktop/CLAUDE-LAUNCHERS"
-# 3) Desktop con espacio
+# 4) Desktop con espacio
 elif [ -d "$HOME/Desktop/CLAUDE LAUNCHERS" ]; then
     if [ -d "$HOME/Desktop/CLAUDE LAUNCHERS/LAUNCHERS" ]; then
         LAUNCHERS_DIR="$HOME/Desktop/CLAUDE LAUNCHERS/LAUNCHERS"

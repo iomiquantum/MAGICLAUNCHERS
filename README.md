@@ -8,9 +8,12 @@ Replica mi flujo personal: una sesión tmux por modelo, contador automático, or
 
 | Carpeta | Para qué |
 |---|---|
+| [`DOCUMENTACION/`](DOCUMENTACION/) | Manual completo — qué hace cada launcher, FAQ, portabilidad |
 | [`MAC/`](MAC/) | Mis `.command` originales de Mac (replica exacta de mi setup) |
 | [`WINDOWS/`](WINDOWS/) | Instalador completo Windows (WSL2 + Ubuntu + launchers .bat en Escritorio) |
 | [`GENERICOS/`](GENERICOS/) | Instalador universal — detecta macOS, Linux o Windows y hace lo correcto |
+
+**Nuevo aquí?** Empezá por [`DOCUMENTACION/LAUNCHERS.md`](DOCUMENTACION/LAUNCHERS.md) — explica qué hace cada cosa.
 
 ## Requisitos
 
