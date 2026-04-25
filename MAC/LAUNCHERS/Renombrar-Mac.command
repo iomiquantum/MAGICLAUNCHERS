@@ -33,6 +33,7 @@ printf "Nuevo nombre: "
 read NEW
 
 NEW=$(echo "$NEW" | tr -c 'a-zA-Z0-9-' '' | cut -c1-15)
+NEW=$(echo "$NEW" | sed 's/--*/-/g; s/^-//; s/-$//')
 
 if [ -z "$NEW" ]; then
     rm -f "$FILE"

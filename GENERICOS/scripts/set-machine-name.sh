@@ -30,8 +30,9 @@ echo "  - Deja vacio y Enter para volver al hostname automatico"
 echo ""
 read -p "Nuevo nombre: " NEW
 
-# Limpia
+# Limpia: solo letras/numeros/guiones, max 15 chars, sin guiones al inicio/final, sin guiones dobles
 NEW=$(echo "$NEW" | tr -c 'a-zA-Z0-9-' '' | cut -c1-15)
+NEW=$(echo "$NEW" | sed 's/--*/-/g; s/^-//; s/-$//')
 
 if [ -z "$NEW" ]; then
     rm -f "$FILE"
