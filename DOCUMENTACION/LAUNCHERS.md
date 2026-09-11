@@ -224,3 +224,17 @@ Sí, usa los launchers de `GENERICOS/`. Linux nativo funciona igual que Mac pero
 
 ### ¿Se puede tener sesiones sincronizadas entre PC y Mac?
 No. Cada máquina tiene sus propias sesiones. Pero puedes hacer git push/pull de archivos que edites y así compartir trabajo entre máquinas.
+
+---
+
+## `Codex-Acceso-Total` y `Muse-Acceso-Total` (acceso total)
+
+- **Qué hacen:** abren una sesión de Codex o Muse con acceso completo
+  (`--dangerously-bypass-approvals-and-sandbox` en Codex, `--yolo` en Muse).
+  Te piden la carpeta del proyecto y numeran la sesión
+  (`CODEX-FULL-{maquina}-{N}`, `MUSE-FULL-{maquina}-{N}`).
+- **Dónde están:** `MAC/LAUNCHERS/` (`.command`), `GENERICOS/launchers/` y
+  `WINDOWS/launchers/` (`.sh`), `WINDOWS/windows-wrappers/` (`.bat`).
+- **Se actualizan solos** con `Actualizar`, como el resto de launchers.
+- **Contadores:** `~/.codex-launchers/full-access-session-counter` y
+  `~/.muse-launchers/full-access-session-counter` (bórralos para resetear).
