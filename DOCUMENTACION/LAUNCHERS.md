@@ -236,5 +236,7 @@ No. Cada máquina tiene sus propias sesiones. Pero puedes hacer git push/pull de
 - **Dónde están:** `MAC/LAUNCHERS/` (`.command`), `GENERICOS/launchers/` y
   `WINDOWS/launchers/` (`.sh`), `WINDOWS/windows-wrappers/` (`.bat`).
 - **Se actualizan solos** con `Actualizar`, como el resto de launchers.
+- **Al actualizar se ordenan solos:** los de Codex quedan en la subcarpeta
+  `CODEX/` y los de Muse en `MUSE/`, dentro de tu carpeta de launchers.
 - **Contadores:** `~/.codex-launchers/full-access-session-counter` y
   `~/.muse-launchers/full-access-session-counter` (bórralos para resetear).

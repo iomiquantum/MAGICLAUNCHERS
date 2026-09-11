@@ -48,9 +48,16 @@ else
     echo "  Usando GENERICOS/launchers/"
 fi
 
-# 1. Launchers principales
-cp "$SRC_LAUNCHERS/"*.sh "$DEST/"
-chmod +x "$DEST/"*.sh
+# 1. Launchers principales (Codex/Muse van a sus subcarpetas)
+mkdir -p "$DEST/CODEX" "$DEST/MUSE"
+for f in "$SRC_LAUNCHERS/"*.sh; do
+    case "$(basename "$f")" in
+        Codex-*) cp "$f" "$DEST/CODEX/" ;;
+        Muse-*) cp "$f" "$DEST/MUSE/" ;;
+        *) cp "$f" "$DEST/" ;;
+    esac
+done
+chmod +x "$DEST/"*.sh "$DEST/CODEX/"*.sh "$DEST/MUSE/"*.sh
 
 # 2. Scripts de mantenimiento que van al Desktop
 for s in set-machine-name.sh update-launchers.sh; do
@@ -75,10 +82,14 @@ fi
 
 # 5. Mac: regenerar .command a partir de .sh si ya existen
 if ls "$DEST/"*.command >/dev/null 2>&1; then
-    for f in "$DEST/"*.sh; do
-        base=$(basename "$f" .sh)
-        cp "$f" "$DEST/${base}.command"
-        chmod +x "$DEST/${base}.command"
+    for d in "$DEST" "$DEST/CODEX" "$DEST/MUSE"; do
+        [ -d "$d" ] || continue
+        for f in "$d/"*.sh; do
+            [ -e "$f" ] || continue
+            base=$(basename "$f" .sh)
+            cp "$f" "$d/${base}.command"
+            chmod +x "$d/${base}.command"
+        done
     done
 fi
 

@@ -38,14 +38,20 @@ STATE="$HOME/.claude-launchers"
 
 echo ""
 echo "== Copiando launchers a: $DEST =="
-mkdir -p "$DEST/LAUNCHERS" "$DEST/ORQUESTADOR" "$DEST/BROADCAST-DISPATCH" "$DEST/dashboard-ORQUESTADOR" "$STATE"
+mkdir -p "$DEST/LAUNCHERS" "$DEST/LAUNCHERS/CODEX" "$DEST/LAUNCHERS/MUSE" "$DEST/ORQUESTADOR" "$DEST/BROADCAST-DISPATCH" "$DEST/dashboard-ORQUESTADOR" "$STATE"
 
-cp "$MAC_DIR/LAUNCHERS/"*.command "$DEST/LAUNCHERS/"
+for f in "$MAC_DIR/LAUNCHERS/"*.command; do
+    case "$(basename "$f")" in
+        Codex-*) cp "$f" "$DEST/LAUNCHERS/CODEX/" ;;
+        Muse-*) cp "$f" "$DEST/LAUNCHERS/MUSE/" ;;
+        *) cp "$f" "$DEST/LAUNCHERS/" ;;
+    esac
+done
 cp "$MAC_DIR/ORQUESTADOR/ORQUESTADOR.command" "$DEST/ORQUESTADOR/"
 cp "$MAC_DIR/BROADCAST-DISPATCH/"*.command "$DEST/BROADCAST-DISPATCH/"
 cp "$MAC_DIR/dashboard/"* "$DEST/dashboard-ORQUESTADOR/"
 
-chmod +x "$DEST/LAUNCHERS/"*.command
+chmod +x "$DEST/LAUNCHERS/"*.command "$DEST/LAUNCHERS/CODEX/"*.command "$DEST/LAUNCHERS/MUSE/"*.command
 chmod +x "$DEST/ORQUESTADOR/"*.command
 chmod +x "$DEST/BROADCAST-DISPATCH/"*.command
 chmod +x "$DEST/dashboard-ORQUESTADOR/"*.command 2>/dev/null || true

@@ -88,8 +88,15 @@ fi
 REPO_DIR=$(find "$TMP" -maxdepth 1 -type d -name "MAGICLAUNCHERS-*" | head -1)
 
 echo "Copiando .command a $LAUNCHERS_DIR..."
-cp "$REPO_DIR/MAC/LAUNCHERS/"*.command "$LAUNCHERS_DIR/"
-chmod +x "$LAUNCHERS_DIR/"*.command
+mkdir -p "$LAUNCHERS_DIR/CODEX" "$LAUNCHERS_DIR/MUSE"
+for f in "$REPO_DIR/MAC/LAUNCHERS/"*.command; do
+    case "$(basename "$f")" in
+        Codex-*) cp "$f" "$LAUNCHERS_DIR/CODEX/" ;;
+        Muse-*) cp "$f" "$LAUNCHERS_DIR/MUSE/" ;;
+        *) cp "$f" "$LAUNCHERS_DIR/" ;;
+    esac
+done
+chmod +x "$LAUNCHERS_DIR/"*.command "$LAUNCHERS_DIR/CODEX/"*.command "$LAUNCHERS_DIR/MUSE/"*.command
 
 if [ -n "$ORQUESTADOR_DIR" ] && [ -d "$ORQUESTADOR_DIR" ]; then
     echo "Copiando ORQUESTADOR a $ORQUESTADOR_DIR..."
@@ -104,6 +111,12 @@ echo "========================================"
 echo ""
 echo "Launchers actualizados:"
 ls -1 "$LAUNCHERS_DIR/" | grep -E '\.command$'
+echo ""
+echo "CODEX/:"
+ls -1 "$LAUNCHERS_DIR/CODEX/" 2>/dev/null | grep -E '\.command$'
+echo ""
+echo "MUSE/:"
+ls -1 "$LAUNCHERS_DIR/MUSE/" 2>/dev/null | grep -E '\.command$'
 echo ""
 echo "Las sesiones activas mantienen su nombre viejo."
 echo "Para aplicar cambios, ejecuta:"

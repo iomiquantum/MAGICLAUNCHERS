@@ -23,9 +23,16 @@ echo "  WS template:     $WS_TPL/"
 
 mkdir -p "$DEST" "$STATE" "$SCRIPTS" "$WS_TPL"
 
-# 1. Launchers principales
-cp "$SRC/launchers/"*.sh "$DEST/"
-chmod +x "$DEST/"*.sh
+# 1. Launchers principales (Codex/Muse van a sus subcarpetas)
+mkdir -p "$DEST/CODEX" "$DEST/MUSE"
+for f in "$SRC/launchers/"*.sh; do
+    case "$(basename "$f")" in
+        Codex-*) cp "$f" "$DEST/CODEX/" ;;
+        Muse-*) cp "$f" "$DEST/MUSE/" ;;
+        *) cp "$f" "$DEST/" ;;
+    esac
+done
+chmod +x "$DEST/"*.sh "$DEST/CODEX/"*.sh "$DEST/MUSE/"*.sh
 
 # 2. Scripts auxiliares (desde GENERICOS, son universales)
 GEN_SCRIPTS="$SRC/../GENERICOS/scripts"
